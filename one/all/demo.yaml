@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo
+  name: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+      - image: registry.cn-hangzhou.aliyuncs.com/acs/rollouts-demo:red
+---
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: demo
+  annotations:
+    app.oam.dev/publishVersion: version1
+spec:
+  components:
+    - name: demo
+      type: ref-objects
+      properties:
+        objects:
+          - apiVersion: apps/v1
+            kind: Deployment
+            name: demo
+  policies:
+    - type: topology
+      name: beijing-clusters
+      properties:
+        clusters: ["c01c346327abe4ac299ebaeaa3c65b13c", "c5705997823264d4b9804ca268d4a40a7"]
