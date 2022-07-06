@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - image: registry.cn-hangzhou.aliyuncs.com/acs/rollouts-demo:red
+        name: demo
 ---
 apiVersion: core.oam.dev/v1beta1
 kind: Application

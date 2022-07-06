@@ -16,3 +16,4 @@ spec:
     spec:
       containers:
       - image: registry.cn-hangzhou.aliyuncs.com/acs/rollouts-demo:red
+        name: demo
